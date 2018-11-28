@@ -27,10 +27,6 @@ define(function(require) {
             	else
             		return e1.title.localeCompare(e2.title);
             });
-            // Mod 1.0.2 - Eliminar la página de plantilla.
-            // var index = collectionData.findIndex(function(e){return e.displayTitle === 'PLANTILLAS'});
-            // if (index > -1)
-            //     collectionData.splice(index,1);
 
             var modelData = this.model.toJSON();
             var template = Handlebars.templates["contentObjects"];

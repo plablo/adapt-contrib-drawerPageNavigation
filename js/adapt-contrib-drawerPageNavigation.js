@@ -1,8 +1,9 @@
 define([
     'backbone',
     'coreJS/adapt',
-    './adapt-contrib-drawerPageNavigationView'
-], function(Backbone, Adapt, DrawerPageNavigationView) {
+    './adapt-contrib-drawerPageNavigationView',
+    './adapt-contrib-drawerPageNavigationHelpers'
+], function(Backbone, Adapt, DrawerPageNavigationView, DrawerPageNavigationHelpers) {
 
     function setupMenu(contentObjectsModel, contentObjectsItems) {
 

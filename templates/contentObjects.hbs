@@ -2,7 +2,7 @@
 	<div class="contentObjects-item-container">
 	{{#each resources}}
 	{{#if _isAvailable}}
-	<div class="contentObjects-item drawer-item">
+	<div class="contentObjects-item drawer-item {{#if_is_actual_page}}selected{{/if_is_actual_page}}">
 		<button class="base contentObjects-item-open drawer-item-open" data-href="{{_id}}" tabindex="0" role="button">
 			<div class="drawer-item-title">
 				<div class="drawer-item-title-inner h6">{{{title}}}</div>
