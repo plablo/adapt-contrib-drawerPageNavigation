@@ -14,4 +14,29 @@ define([
         }
     });
 
+    /*
+        Helper that returns the page level inside its tree. Starts from 0 as the
+        course level.
+        @context The page.
+    */
+    Handlebars.registerHelper('get_page_level', function() {
+        var COURSE = "course";
+        var MENU = "menu";
+        var element = Adapt.findById(this._id);
+        var level = -1;
+        do {
+            var parentType = Adapt.findById(element.attributes._parentId).attributes._type;
+            switch (parentType) {
+                case COURSE:
+                    break;
+                case MENU:
+                    level += 1;
+                    element = Adapt.findById(element.attributes._parentId);
+                    break;
+                default:
+                    break;
+            }
+        } while(parentType != COURSE)
+        return 'level' + level;
+    });
 })
