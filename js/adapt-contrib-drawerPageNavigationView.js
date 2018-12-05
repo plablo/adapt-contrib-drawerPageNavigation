@@ -13,21 +13,12 @@ define(function(require) {
         },
 
         events: {
-            'click .contentObjects-item-container button': 'onContentObjectMenuClicked'
+            'click .contentObjects-item-container button': 'onContentObjectMenuClicked',
+            'click .menu-container span:first-child':'onSubmenuButtonClicked'
         },
 
         render: function() {
             var collectionData = this.collection.toJSON();
-            // Mod 1.0.1 - Añadir un orden al listado del índice.
-            collectionData.sort(function(e1,e2){
-            	if (e1._parentId == 'course')
-            		return -1;
-            	else if (e2._parentId == 'course')
-            		return 1;
-            	else
-            		return e1.title.localeCompare(e2.title);
-            });
-
             var modelData = this.model.toJSON();
             var template = Handlebars.templates["contentObjects"];
             this.$el.html(template({model: modelData, resources: collectionData, _globals: Adapt.course.get('_globals')}));
@@ -43,6 +34,15 @@ define(function(require) {
             if(event && event.preventDefault) event.preventDefault();
             if(this.model.get('_isLocked')) return;
             Backbone.history.navigate('#/id/' + $(event.currentTarget).data("href"), {trigger: true});
+        },
+        onSubmenuButtonClicked: function(event) {
+            if(event && event.preventDefault) event.preventDefault();
+            if(this.model.get('_isLocked')) return;
+            var container = $('.'+$(event.currentTarget).next('button').data("href")+'_container');
+            container.slideToggle({start: function(){
+                $(event.currentTarget).toggleClass('icon-controls-small-right');
+                $(event.currentTarget).toggleClass('icon-controls-small-down');
+            }});
         }
     });
 

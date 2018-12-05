@@ -22,7 +22,9 @@ define([
     Adapt.once('app:dataReady', function() {
 
         var drawerPageNavigationData = Adapt.course.get('_drawerPageNavigation');
-        var contentObjectItems = Adapt.contentObjects.models;
+        // var contentObjectItems = Adapt.contentObjects.models;
+        // Mod 0.1.2.: añadir estructura acordeón. Enviar sólo el primer nivel del menú.
+        var contentObjectItems = Adapt.contentObjects.where({'_parentId':'course','_isAvailable':true, '_isLocked':false});
 
         // do not proceed until resource set on course.json
         if (!contentObjectItems || drawerPageNavigationData._isEnabled === false) return;

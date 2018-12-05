@@ -1,0 +1,28 @@
+    {{#each resources}}
+        {{#if _isAvailable}}
+            <div class="contentObjects-item drawer-item {{#if_is_actual_page}}selected{{/if_is_actual_page}} {{#if_is_menu_container}}menu-container{{/if_is_menu_container}}">
+            {{#if_is_menu_container}}<span class="icon icon-controls-small-down"></span>{{/if_is_menu_container}}
+              <button class="base contentObjects-item-open drawer-item-open" data-href="{{_id}}" tabindex="0" role="button">
+                <div class="drawer-item-title {{get_page_level}}">
+                  <div class="drawer-item-title-inner h6">{{{title}}}</div>
+                </div>
+                <div class="drawer-item-description {{get_page_level}}">
+                  <div class="drawer-item-description-inner">{{{description}}}</div>
+                </div>
+              </button>
+            </div>
+            <!-- contentedor -->
+            {{#if_is_equal _type 'menu'}}
+                {{#if _children.models}} {{! within the context of this item}}
+                    {{#if_is_equal _parentId 'course'}}
+                        {{> contentObjectsPartial resources=(getElement _children)}}
+                    {{else}}
+                    <div class="{{_id}}_container">
+                        {{> contentObjectsPartial resources=(getElement _children)}}
+                    </div>
+                    {{/if_is_equal}}
+                {{/if}}
+            {{/if_is_equal}}
+            <!-- /contenedor -->
+        {{/if}}
+    {{/each}}
